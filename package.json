@@ -1,0 +1,34 @@
+{
+  "name": "camino-geodata",
+  "version": "0.0.0",
+  "description": "Scripts d'import des données géographiques de Camino",
+  "main": "index.js",
+  "repository": "git@github.com:mtes-mct/camino-geodata.git",
+  "author": "Jérôme Desboeufs <jerome.desboeufs@data.gouv.fr>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "lint": "xo",
+    "import-data": "node --max_old_space_size=8192 import.js"
+  },
+  "dependencies": {
+    "@turf/turf": "^5.1.6",
+    "chalk": "^2.4.1",
+    "gdal": "^0.9.7",
+    "js-yaml": "^3.12.0",
+    "lodash": "^4.17.10",
+    "martinez-polygon-clipping": "^0.5.0",
+    "srs": "^1.2.0",
+    "which-polygon": "^2.2.0"
+  },
+  "devDependencies": {
+    "xo": "^0.22.0"
+  },
+  "xo": {
+    "semicolon": false,
+    "space": 2
+  },
+  "engines": {
+    "node": ">= 8"
+  }
+}
