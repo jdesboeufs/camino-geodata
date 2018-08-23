@@ -1,0 +1,56 @@
+- path: PER-outremer-M-premiere-periode/M549_SPM.TAB
+  numero: "549"
+  nom: "Saint-Pierre-et-Miquelon"
+  typeTitre: prh
+  etape: dex
+  demarche: oct
+
+- path: PER-outremer-M-premiere-periode/M564_GUYANE.TAB
+  numero: "564"
+  nom: "Guyane maritime"
+  typeTitre: prh
+  etape: dex
+  demarche: oct
+
+- path: PER-outremer-M-premiere-periode/M573_Caravelle.TAB
+  numero: "573"
+  nom: "Caravelle"
+  typeTitre: prh
+  etape: dex
+  demarche: oct
+
+- path: PER-outremer-N-deuxieme-periode/N549_SPM.TAB
+  numero: "549"
+  nom: "Saint-Pierre-et-Miquelon"
+  typeTitre: prh
+  etape: dex
+  demarche: pr1
+
+- path: PER-outremer-N-deuxieme-periode/N564_GUYANE.TAB
+  numero: "564"
+  nom: "Guyane maritime"
+  typeTitre: prh
+  etape: dex
+  demarche: pr1
+
+- path: PER-outremer-N-deuxieme-periode/N573_Caravelle.TAB
+  numero: "573"
+  nom: "Caravelle"
+  typeTitre: prh
+  etape: dex
+  demarche: pr1
+
+- path: PER-outremer-P-troisieme-periode/P549_SPM.TAB
+  numero: "549"
+  nom: "Saint-Pierre-et-Miquelon"
+  typeTitre: prh
+  etape: dex
+  demarche: pr2
+
+- path: PER-outremer-P-troisieme-periode/P564-GUYANE.TAB
+  numero: "564"
+  nom: "Guyane maritime"
+  typeTitre: prh
+  etape: dex
+  demarche: pr2
+

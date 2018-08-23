@@ -63,3 +63,4 @@ typings/
 # Custom
 /data
 .DS_Store
+titres.geojson
