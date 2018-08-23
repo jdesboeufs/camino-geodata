@@ -39,6 +39,12 @@ const TITRES_DEM = {
   D: {etape: 'mfr'}
 }
 
+const LETTRES_DEMARCHE = {
+  M: {demarche: 'oct'},
+  N: {demarche: 'pr1'},
+  P: {demarche: 'pr2'}
+}
+
 function getType(properties) {
   const result = {}
   if (properties.TYPE && properties.TYPE in TYPES) {
@@ -50,6 +56,9 @@ function getType(properties) {
   if (result.typeTitre) {
     result.typeTitreLabel = TYPES_TITRES_LABELS[result.typeTitre]
   }
+  if (result.typeTitre === 'prh' && result.etape === 'dex' && properties.NUMERO.charAt(0) in LETTRES_DEMARCHE) {
+    Object.assign(result, LETTRES_DEMARCHE[properties.NUMERO.charAt(0)])
+  }
   return result
 }
 
@@ -57,22 +66,37 @@ function getNom(properties) {
   return properties.NOM || properties.NOM_MIN
 }
 
+function getNumero({NUMERO}) {
+  if (!NUMERO) {
+    throw new Error('Titre sans NUMERO')
+  }
+  const cleanedNumero = NUMERO.replace(/\s/g, '')
+  const result = cleanedNumero.match(/^(M|N|P|C|D|E)?(\d+)$/)
+  if (!result) {
+    throw new Error('NUMERO du titre invalide: ' + NUMERO)
+  }
+  // Si la première lettre est un C, un D ou un E, on conserve la lettre en préfixe
+  return ['C', 'D', 'E'].includes(result[1]) ? cleanedNumero : result[2]
+}
+
 function computeProperties(feature) {
   const {properties} = feature
+  let numero
+  try {
+    numero = getNumero(properties)
+  } catch (err) {
+    console.log(chalk.gray(err.message + ' => ignoré'))
+    return
+  }
   const type = getType(properties)
   if (!type.typeTitre || !type.etape) {
     console.log(chalk.gray('Titre sans type défini => ignoré'))
-    return
-  }
-  if (!properties.NUMERO) {
-    console.log(chalk.gray('Titre sans NUMERO => ignoré'))
     return
   }
   const nom = getNom(properties)
   if (!nom) {
     console.log(chalk.gray('Titre sans NOM'))
   }
-  const numero = properties.NUMERO.replace(/\s/g, '')
   const communes = getIntersectedCommunes(feature)
   return {numero, nom, communes, ...type, indicativeTypeLabel: properties.TYPE_FR || properties.LEGENDE}
 }
