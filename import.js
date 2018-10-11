@@ -1,7 +1,7 @@
 #! /usr/bin/env node --max_old_space_size=8192
 const {join} = require('path')
 const {writeFileSync} = require('fs')
-const {concat} = require('lodash')
+const {concat, omit} = require('lodash')
 const decorate = require('./lib/decorate')
 const importMetropoleH = require('./lib/import/h/metropole')
 const importOutremerH = require('./lib/import/h/outremer')
@@ -18,6 +18,17 @@ async function main() {
 
   const titresJO = await extractPoints()
   writeFileSync(join(__dirname, 'titres-jo.json'), JSON.stringify(titresJO))
+  writeFileSync(join(__dirname, 'titres-jo.geojson'), JSON.stringify({
+    type: 'FeatureCollection',
+    features: titresJO
+      .map(titre => {
+        return {
+          type: 'Feature',
+          properties: omit(titre, 'points', 'perimetre'),
+          geometry: titre.perimetre
+        }
+      })
+  }))
 }
 
 main().catch(err => {
